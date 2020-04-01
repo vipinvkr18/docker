@@ -1,0 +1,41 @@
+<plugin>
+	<groupId>com.google.cloud.tools</groupId>
+	<artifactId>jib-maven-plugin</artifactId>
+	<version>1.6.1</version>
+	<configuration>
+		<container>
+			<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+		</container>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>dockerBuild</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+
+####### custom configuration
+<configuration>
+	<from>
+		<image>openjdk:alpine</image>
+	</from>
+	<to>
+		<image>vipin/${project.name}</image>
+		<tags>
+			<tag>${project.version}</tag>
+			<tag>latest</tag>
+		</tags>
+	</to>
+	<container>
+		<jvmFlags>
+			<jvmFlag>-Xms512m</jvmFlag>
+		</jvmFlags>
+		<mainClass>com.vipin.RestfulWebServicesApplication</mainClass>
+		<ports>
+			<port>8080</port>
+		</ports>
+	</container>
+</configuration>
