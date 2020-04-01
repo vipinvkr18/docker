@@ -1,0 +1,25 @@
+######## pom.xml
+<plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>dockerfile-maven-plugin</artifactId>
+	<version>1.4.10</version>
+	<executions>
+		<execution>
+			<id>default</id>
+			<goals>
+				<goal>build</goal>
+			</goals>
+		</execution>
+	</executions>
+	<configuration>
+		<repository>vipin/${project.name}</repository>
+		<tag>${project.version}</tag>
+		<skipDockerInfo>true</skipDockerInfo>
+	</configuration>
+</plugin>
+
+###### Dockerfile
+FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
+ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
